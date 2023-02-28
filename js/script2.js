@@ -21,6 +21,8 @@ jogador.desenho()
 window.addEventListener('keydown', (e)=>{
     const xbot = bot.xAxis
     const ybot = bot.yAxis
+    jogador.parado = false
+    jogador.correndo = true
     if(e.key == 'a'){
         teclas.esquerda = true
     }
@@ -42,6 +44,8 @@ window.addEventListener('keydown', (e)=>{
     jogador.andar()
 })
 window.addEventListener('keyup', ()=>{
+    jogador.parado = true
+    jogador.correndo = false
     if(teclas.esquerda){
         teclas.esquerda = false
     }
@@ -62,7 +66,7 @@ window.addEventListener('keyup', ()=>{
 window.addEventListener('keydown', (e)=>{
     const xJ = jogador.xAxis
     const yJ = jogador.yAxis
-    jogador.parado = false
+    
     if(e.key == 'ArrowLeft'){
         teclas2.esquerda = true
     }
@@ -84,7 +88,7 @@ window.addEventListener('keydown', (e)=>{
     bot.andar()
 })
 window.addEventListener('keyup', ()=>{
-    jogador.parado = true
+    
     if(teclas2.esquerda){
         teclas2.esquerda = false
     }

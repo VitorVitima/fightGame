@@ -17,11 +17,23 @@ class Bot{
 
         this.alcance = 200
 
+        this.numSprite = 0
+        this.parado = true
+        this.correndo = false
+
+        this.img = new Image()
+
+        
+        this.srcCorrendo = './imgs/fantasy/Run.png'
+        this.srcParado = './imgs/fantasy/Idle.png'
+        this.img.src=this.srcParado
+        
         this.vida = 100
         this.dano = 10
     }
     desenho(){
-        this.ctx.fillStyle='#ffa500'
+        this.ctx.fillStyle='transparent'
+        this.ctx.drawImage(this.img, 162*this.numSprite, 0, 200, 200, this.xAxis - 160, this.yAxis - 28, 450, 450)
         this.ctx.fillRect(this.xAxis, this.yAxis, this.sizeW, this.sizeH)
     }
     andar(){
