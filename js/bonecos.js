@@ -13,7 +13,7 @@ class Jogador{
         this.img = new Image()
         this.img.src='./imgs/martial/Idle.png'
 
-
+        
         this.puloAltura= 100
         this.pulando = false
 
@@ -29,6 +29,11 @@ class Jogador{
         this.parado = true
         this.correndo = false
 
+        this.srcCorrendo = './imgs/martial/Run.png'
+        this.srcParado = './imgs/martial/Idle.png'
+        this.srcAttack = './imgs/martial/Attack1.png'
+
+        this.attack()
         this.bonecoParado()
         this.run()
     }
@@ -65,14 +70,25 @@ class Jogador{
         }
     }
     attack(){
-        if(this.teclas.space && this.atacando == false){
-            this.atacando = true
-            this.ctx.fillStyle = '#ff0000'
-            this.ctx.fillRect(this.xAxis, this.yAxis + 50, this.alcance, 50)
-            setTimeout(()=>{
-                this.atacando = false
-            }, 90)
-        }
+        setInterval(()=>{
+            if(this.teclas.space && this.atacando == false){
+                this.img.src = this.srcAttack
+                this.atacando = true
+                this.ctx.fillStyle = 'transparent'
+                this.ctx.fillRect(this.xAxis, this.yAxis + 50, this.alcance, 50)
+                for(let v1 = 0; v1 < 6; v1++){
+                    setTimeout(()=>{
+                        this.numSprite++
+                        if(this.numSprite > 6){
+                            this.numSprite = 0
+                        }
+                    }, 200)
+                }
+                setTimeout(()=>{
+                    this.atacando = false
+                }, 200)
+            }
+        }, 200)
     }
     colidiu(xBot, yBot){
         if(this.xAxis + this.alcance + 10 > xBot && this.xAxis < xBot + this.sizeW && this.yAxis + this.sizeH > yBot && this.yAxis < yBot + this.sizeH){
@@ -85,6 +101,7 @@ class Jogador{
     bonecoParado(){
         setInterval(()=>{
             if(this.parado){
+                this.img.src = this.srcParado
                 this.numSprite++
                 if(this.numSprite > 7){
                     this.numSprite = 0
@@ -95,6 +112,7 @@ class Jogador{
     run(){
         setInterval(()=>{
             if(this.correndo){
+                this.img.src = this.srcCorrendo
                 this.numSprite++
                 if(this.numSprite > 7){
                     this.numSprite = 0

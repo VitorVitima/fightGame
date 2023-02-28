@@ -86,6 +86,7 @@ window.addEventListener('keydown', (e)=>{
         }
     }
     bot.andar()
+    
 })
 window.addEventListener('keyup', ()=>{
     
@@ -111,7 +112,7 @@ const animacao = () =>{
     jogador.attack()
 
     bot.desenho()
-    bot.attack()
+
 
     lifes[1].children[0].style.width = `${bot.vida}%`
     lifes[0].children[0].style.width = `${jogador.vida}%`
