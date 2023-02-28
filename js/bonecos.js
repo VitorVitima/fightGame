@@ -5,24 +5,36 @@ class Jogador{
         this.canvas = canvas
         
         this.xAxis = 0
-        this.yAxis = this.canvas.height - 200
+        this.yAxis = this.canvas.height - 150
         this.sizeW = 100
-        this.sizeH = 200
+        this.sizeH = 150
         this.velocidade = 10
+
+        this.img = new Image()
+        this.img.src='./imgs/martial/Idle.png'
 
 
         this.puloAltura= 100
         this.pulando = false
 
+        
         this.atacando = false
-
+        
         this.alcance = 200
-
+        
         this.vida = 100
         this.dano = 10
+
+        this.numSprite = 0
+        this.parado = true
+        this.correndo = false
+
+        this.bonecoParado()
+        this.run()
     }
     desenho(){
-        this.ctx.fillStyle='#fff'
+        this.ctx.fillStyle='transparent'
+        this.ctx.drawImage(this.img, 200*this.numSprite, 0, 200, 200, this.xAxis - 160, this.yAxis - 125, 450, 450)
         this.ctx.fillRect(this.xAxis, this.yAxis, this.sizeW, this.sizeH)
     }
     andar(){
@@ -39,17 +51,16 @@ class Jogador{
         if(this.teclas.cima){
             this.pulo()
         }
-        //if(this.teclas.baixo){
-        //    this.yAxis += this.velocidade
-        //}
     }
     pulo(){
         if(this.pulando == false){
+            this.parado = false
             this.pulando = true
             this.yAxis -= this.puloAltura
             setTimeout(()=>{
                 this.yAxis += this.puloAltura
                 this.pulando = false
+                this.parado = true
             }, 200)
         }
     }
@@ -70,5 +81,25 @@ class Jogador{
             return false
 
         }
+    }
+    bonecoParado(){
+        setInterval(()=>{
+            if(this.parado){
+                this.numSprite++
+                if(this.numSprite > 7){
+                    this.numSprite = 0
+                }
+            }
+        }, 200)
+    }
+    run(){
+        setInterval(()=>{
+            if(this.correndo){
+                this.numSprite++
+                if(this.numSprite > 7){
+                    this.numSprite = 0
+                }
+            }
+        }, 200)
     }
 }

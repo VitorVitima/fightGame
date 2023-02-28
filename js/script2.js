@@ -62,6 +62,7 @@ window.addEventListener('keyup', ()=>{
 window.addEventListener('keydown', (e)=>{
     const xJ = jogador.xAxis
     const yJ = jogador.yAxis
+    jogador.parado = false
     if(e.key == 'ArrowLeft'){
         teclas2.esquerda = true
     }
@@ -83,6 +84,7 @@ window.addEventListener('keydown', (e)=>{
     bot.andar()
 })
 window.addEventListener('keyup', ()=>{
+    jogador.parado = true
     if(teclas2.esquerda){
         teclas2.esquerda = false
     }
